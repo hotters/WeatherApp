@@ -1,6 +1,6 @@
 <input class="city_input" type="text" placeholder="city" value="khabarovsk" #city (keyup.enter)="getWeather(city.value)">
 
 <app-card></app-card>
-
+<app-chart></app-chart>
 
 <pre>Loading: {{loading$ | async | json}}</pre>

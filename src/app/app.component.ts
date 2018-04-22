@@ -6,6 +6,7 @@ import { Weather } from './models/weather.model';
 import { GetWeather, AppState } from './store/app.store';
 import { Wind } from './models/wind.model';
 
+
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
