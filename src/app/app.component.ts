@@ -14,15 +14,15 @@ import { Wind } from './models/wind.model';
 export class AppComponent implements OnInit {
 
 	@Select(state => state.data.loading) loading$: Observable<boolean>;
-	@Select(state => state.data.weather) weather$: Observable<Weather>;
 
 	constructor(
 		private store: Store
 	) {	}
 
-	ngOnInit() { }
+	ngOnInit() {
+	}
 
-	getWeather(str: string) {
-		this.store.dispatch(new GetWeather('khabarovsk'));
+	getWeather(city: string) {
+		this.store.dispatch(new GetWeather(city));
 	}
 }

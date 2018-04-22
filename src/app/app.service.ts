@@ -68,7 +68,6 @@ export class AppService {
 				console.log('[SERVICE]', weather);
 				return weather;
 			}),
-			delay(3000),
 			catchError(err => _throw(err)),
 		);
 	}

@@ -1,9 +1,6 @@
-<input class="city_input" type="text" placeholder="city" #city (keyup.enter)="getWeather(city.value)">
+<input class="city_input" type="text" placeholder="city" value="khabarovsk" #city (keyup.enter)="getWeather(city.value)">
 
-<div class="container" *ngIf="loading$">
+<app-card></app-card>
 
-</div>
 
 <pre>Loading: {{loading$ | async | json}}</pre>
-<pre>Weather: {{weather$ | async | json}}</pre>
-
