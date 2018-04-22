@@ -1,5 +1,9 @@
-<input calss="city_input" type="text" placeholder="city" value="Khabarovsk">
+<input class="city_input" type="text" placeholder="city" #city (keyup.enter)="getWeather(city.value)">
 
+<div class="container" *ngIf="loading$">
 
+</div>
 
-<pre>{{data | async | json}}</pre>
+<pre>Loading: {{loading$ | async | json}}</pre>
+<pre>Weather: {{weather$ | async | json}}</pre>
+

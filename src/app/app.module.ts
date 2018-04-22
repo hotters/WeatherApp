@@ -10,6 +10,10 @@ import { environment } from '../environments/environment.prod';
 import { HttpClientModule } from '@angular/common/http';
 import { AppService } from './app.service';
 
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { AppState } from './store/app.store';
+
 
 @NgModule({
 	declarations: [
@@ -20,7 +24,9 @@ import { AppService } from './app.service';
 	imports: [
 		BrowserModule,
 		HttpClientModule,
-		ServiceWorkerModule.register('/ngsw-config.json', { enabled: environment.production }),
+		// ServiceWorkerModule.register('/ngsw-config.json', { enabled: environment.production }),
+		NgxsModule.forRoot([AppState]),
+		NgxsReduxDevtoolsPluginModule.forRoot(),
 	],
 	providers: [
 		AppService
