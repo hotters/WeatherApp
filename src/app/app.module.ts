@@ -12,6 +12,7 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { AppState } from './store/app.store';
 import { MatInputModule, MatProgressBarModule } from '@angular/material';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 @NgModule({
@@ -24,7 +25,7 @@ import { MatInputModule, MatProgressBarModule } from '@angular/material';
 		BrowserModule,
 		HttpClientModule,
 		BrowserAnimationsModule,
-		// ServiceWorkerModule.register('/ngsw-config.json', { enabled: environment.production }),
+		ServiceWorkerModule.register('ngsw-worker.js'),
 		NgxsModule.forRoot([AppState]),
 		NgxsReduxDevtoolsPluginModule.forRoot(),
 		MatInputModule,

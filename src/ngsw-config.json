@@ -26,5 +26,17 @@
 				]
 			}
 		}
-	]
+	],
+	"dataGroups": [{
+		"name": "yahoo-api",
+		"urls": [
+			"https://query.yahooapis.com"
+		],
+		"cacheConfig": {
+			"maxSize": 100,
+			"maxAge": "1d",
+			"timeout": "10s",
+			"strategy": "freshness"
+		}
+	}]
 }

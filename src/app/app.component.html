@@ -4,6 +4,7 @@
 
 <mat-form-field class="city_input">
 	<input matInput placeholder="Enter city" value="khabarovsk" #city (keyup.enter)="getWeather(city.value)">
+	<mat-hint>To search press Enter</mat-hint>
 </mat-form-field>
 
 <app-chart></app-chart>
