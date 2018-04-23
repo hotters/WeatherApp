@@ -1,10 +1,29 @@
-<div class="container">
-	<div class="card" *ngFor="let item of (forecast$ | async)">
+<div class="container" *ngIf="(weather$ | async) as weather">
+	<div class="wrap">
+		<div class="full">
+			<div class="current">
+				<div>{{weather.current.date}}</div>
+				<span class="high">{{weather.current.temp}}&deg;</span>
+				<div>{{weather.current.text}}</div>
+			</div>
+			<div class="wind">
+				<div>Chill: {{weather.wind.chill}}</div>
+				<div>Speed: {{weather.wind.speed}}</div>
+			</div>
+			<div class="atmosphere">
+				<div>Humidity: {{weather.atmosphere.humidity}}</div>
+				<div>Pressure: {{weather.atmosphere.pressure}}</div>
+				<div>Visibility: {{weather.atmosphere.visibility}}</div>
+			</div>
+		</div>
+	</div>
+	<div class="card" *ngFor="let item of weather.forecast">
 		<div>{{item.day}} {{item.date}}</div>
 		<div>
 			<span class="high">{{item.high}}&deg;</span>
 			<span class="low">{{item.low}}&deg;</span>
 		</div>
 		<div>{{item.text}}</div>
+
 	</div>
 </div>

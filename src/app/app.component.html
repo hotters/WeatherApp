@@ -1,6 +1,12 @@
-<input class="city_input" type="text" placeholder="city" value="khabarovsk" #city (keyup.enter)="getWeather(city.value)">
+<div class="progress_bar">
+	<mat-progress-bar mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
+</div>
 
-<app-card></app-card>
+<mat-form-field class="city_input">
+	<input matInput placeholder="Enter city" value="khabarovsk" #city (keyup.enter)="getWeather(city.value)">
+</mat-form-field>
+
 <app-chart></app-chart>
+<app-card></app-card>
 
-<pre>Loading: {{loading$ | async | json}}</pre>
+<!--<pre>Loading: {{loading$ | async | json}}</pre>-->

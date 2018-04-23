@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, tap, catchError, delay } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { Weather } from './models/weather.model';
 import { Observable } from 'rxjs/Observable';
 import { Wind } from './models/wind.model';
 import { Atmosphere } from './models/atmosphere.model';
-import { Forecast, CurrentForecast } from './models/forecast.model';
-import { of } from 'rxjs/observable/of';
-import { _throw } from 'rxjs/observable/throw';
-
+import { CurrentForecast, Forecast } from './models/forecast.model';
 
 
 @Injectable()
@@ -30,7 +27,7 @@ export class AppService {
 				if (data && data.query && data.query.results && data.query.results.channel) {
 					return data.query.results.channel;
 				} else {
-					throw(new Error('Data error'));
+					throw('Data error');
 				}
 			}),
 			map(data => {
@@ -59,16 +56,13 @@ export class AppService {
 					temp: data.item.condition.temp,
 					text: data.item.condition.text,
 				};
-				const weather: Weather = {
+				return {
 					wind: wind,
 					atmosphere: atmosphere,
 					forecast: forecast,
 					current: current
 				};
-				console.log('[SERVICE]', weather);
-				return weather;
-			}),
-			catchError(err => _throw(err)),
+			})
 		);
 	}
 
