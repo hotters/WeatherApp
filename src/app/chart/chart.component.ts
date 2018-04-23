@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Chart } from 'chart.js';
 import 'chartjs-plugin-datalabels';
@@ -15,69 +15,62 @@ import { filter, map } from 'rxjs/operators';
 })
 export class ChartComponent implements OnInit {
 
-	@ViewChild('canva') canva: ElementRef;
+	@ViewChild('canvas') canvas: ElementRef;
 	chart: any = [];
 
 	@Select((state: { data: { weather: Weather } }) => state.data.weather && state.data.weather.forecast) forecast$: Observable<Forecast[]>;
 
-	constructor() { }
+	constructor() {
+	}
 
 	ngOnInit() {
 		this.forecast$.pipe(
 			filter((data: any) => data),
 			map((data: Forecast[]) => data)
 		)
-		.subscribe(data => {
-			let min = data.map(item => +item.low);
-			let max = data.map(item => +item.high);
-			let weatherDates = data.map(item => item.day);
-			let ctx = this.canva.nativeElement.getContext('2d');
-			console.log('[CHART]', min, max, weatherDates, ctx);
-			this.chart = new Chart(ctx, {
-				type: 'line',
-				data: {
-					labels: weatherDates,
-					datasets: [
-						{
-							label: 'Min',
-							data: min,
-							borderColor: '#36a2eb',
-							fill: false
-						},
-						{
-							label: 'Max',
-							data: max,
-							borderColor: '#ff6384',
-							fill: false
-						},
-					],
-				},
-				options: {
-					legend: {
-						display: true
-					},
-					plugins: {
-						datalabels: {
-							backgroundColor: context => context.dataset.borderColor,
-							borderRadius: 4,
-							color: 'white',
-							font: {
-								weight: 'bold'
+			.subscribe(data => {
+				const min = data.map(item => +item.low);
+				const max = data.map(item => +item.high);
+				const weatherDates = data.map(item => item.day);
+				const ctx = this.canvas.nativeElement.getContext('2d');
+				console.log('[CHART]', min, max, weatherDates, ctx);
+				this.chart = new Chart(ctx, {
+					type: 'line',
+					data: {
+						labels: weatherDates,
+						datasets: [
+							{
+								label: 'Min',
+								data: min,
+								borderColor: '#36a2eb',
+								fill: false
 							},
-							formatter: Math.round
-						}
+							{
+								label: 'Max',
+								data: max,
+								borderColor: '#ff6384',
+								fill: false
+							},
+						],
 					},
-					// scales: {
-					// 	xAxes: [{
-					// 		display: true
-					// 	}],
-					// 	yAxes: [{
-					// 		display: true,
-					// 	}]
-					// }
-				}
+					options: {
+						legend: {
+							display: true
+						},
+						plugins: {
+							datalabels: {
+								backgroundColor: context => context.dataset.borderColor,
+								borderRadius: 4,
+								color: 'white',
+								font: {
+									weight: 'bold'
+								},
+								formatter: Math.round
+							}
+						},
+					}
+				});
 			});
-		});
 
 	}
 
