@@ -8,7 +8,7 @@
 			"root": "src",
 			"outDir": "dist",
 			"assets": [
-				"assets/ngsw-config.json",
+				"assets",
 				"favicon.ico"
 			],
 			"index": "index.html",
