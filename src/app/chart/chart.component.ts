@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Chart } from 'chart.js';
-import 'chartjs-plugin-datalabels';
+// import 'chartjs-plugin-datalabels';
 import { Observable } from 'rxjs/Observable';
 import { Forecast } from '../models/forecast.model';
 import { Weather } from '../models/weather.model';
@@ -36,39 +36,41 @@ export class ChartComponent implements OnInit {
 				const weatherDates = data.map(item => item.day);
 				const ctx = this.canvas.nativeElement.getContext('2d');
 				console.log('[CHART]', min, max, weatherDates, ctx);
+
 				this.chart = new Chart(ctx, {
-					type: 'line',
+					type: 'bar',
 					data: {
 						labels: weatherDates,
 						datasets: [
 							{
 								label: 'Min',
 								data: min,
-								borderColor: '#36a2eb',
-								fill: false
+								backgroundColor: '#36a2eb',
+								fill: false,
+								stack: 0
 							},
 							{
 								label: 'Max',
 								data: max,
-								borderColor: '#ff6384',
-								fill: false
+								backgroundColor: '#ff6384',
+								fill: false,
+								stack: 0
 							},
 						],
 					},
 					options: {
+						responsive: true,
+						hover: {
+							mode: 'nearest',
+							intersect: true
+						},
+						tooltips: {
+							display: false,
+							mode: 'point',
+							intersect: false,
+						},
 						legend: {
 							display: true
-						},
-						plugins: {
-							datalabels: {
-								backgroundColor: context => context.dataset.borderColor,
-								borderRadius: 4,
-								color: 'white',
-								font: {
-									weight: 'bold'
-								},
-								formatter: Math.round
-							}
 						},
 					}
 				});
