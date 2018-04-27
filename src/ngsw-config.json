@@ -27,16 +27,30 @@
 			}
 		}
 	],
-	"dataGroups": [{
-		"name": "yahoo-api",
-		"urls": [
-			"https://query.yahooapis.com"
-		],
-		"cacheConfig": {
-			"maxSize": 100,
-			"maxAge": "1d",
-			"timeout": "10s",
-			"strategy": "freshness"
+	"dataGroups": [
+		{
+			"name": "yahoo-api",
+			"urls": [
+				"https://query.yahooapis.com"
+			],
+			"cacheConfig": {
+				"maxSize": 100,
+				"maxAge": "1d",
+				"timeout": "10s",
+				"strategy": "freshness"
+			}
+		},
+		{
+			"name": "google-fonts",
+			"urls": [
+				"https://fonts.googleapis.com"
+			],
+			"cacheConfig": {
+				"maxSize": 1,
+				"maxAge": "365d",
+				"strategy": "performance",
+				"timeout": "100u"
+			}
 		}
-	}]
+	]
 }

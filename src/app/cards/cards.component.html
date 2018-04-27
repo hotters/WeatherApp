@@ -1,0 +1,10 @@
+<div class="container" *ngIf="(weather$ | async) as weather">
+	<div class="card" *ngFor="let item of weather.forecast" [ngStyle]="{'background-color': setColorOfTemperature(item.high)}">
+		<div>{{item.day}} {{item.date}}</div>
+		<div>
+			<span class="high">{{item.high}}&deg;</span>
+			<span class="low">{{item.low}}&deg;</span>
+		</div>
+		<div>{{item.text}}</div>
+	</div>
+</div>

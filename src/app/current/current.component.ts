@@ -4,11 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import { Weather } from '../models/weather.model';
 
 @Component({
-	selector: 'app-card',
-	templateUrl: './card.component.html',
-	styleUrls: ['./card.component.css']
+	selector: 'app-current',
+	templateUrl: './current.component.html',
+	styleUrls: ['./current.component.scss']
 })
-export class CardComponent {
+export class CurrentComponent {
 
 	@Select((state: { data: { weather: Weather } }) => state.data.weather) weather$: Observable<Weather>;
 

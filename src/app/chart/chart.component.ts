@@ -10,8 +10,10 @@ import { filter, map } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-chart',
-	templateUrl: './chart.component.html',
-	styleUrls: ['./chart.component.css']
+	template: `
+		<div class="canvas">
+			<canvas #canvas></canvas>
+		</div>`,
 })
 export class ChartComponent implements OnInit {
 

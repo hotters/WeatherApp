@@ -5,16 +5,19 @@ import { Select, Store } from '@ngxs/store';
 import { Weather } from './models/weather.model';
 import { GetWeather, AppState } from './store/app.store';
 import { Wind } from './models/wind.model';
+import { Location } from './models/location.model';
 
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.css']
+	styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
 
+	@Select(state => state.data.weather && state.data.weather.location) location$: Observable<Location>;
 	@Select(state => state.data.loading) loading$: Observable<boolean>;
+	@Select(state => state.data.error) error$: Observable<string>;
 
 	constructor(
 		private store: Store

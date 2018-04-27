@@ -17,9 +17,9 @@
 			"test": "test.ts",
 			"tsconfig": "tsconfig.app.json",
 			"testTsconfig": "tsconfig.spec.json",
-			"prefix": "app",			
+			"prefix": "app",
 			"styles": [
-				"styles.css"
+				"styles.scss"
 			],
 			"scripts": [],
 			"environmentSource": "environments/environment.ts",
@@ -27,7 +27,7 @@
 				"dev": "environments/environment.ts",
 				"prod": "environments/environment.prod.ts"
 			},
-			"serviceWorker": true,
+			"serviceWorker": true
 		}
 	],
 	"e2e": {
@@ -55,7 +55,7 @@
 		}
 	},
 	"defaults": {
-		"styleExt": "css",
+		"styleExt": "sass",
 		"component": {
 			"changeDetection": "OnPush"
 		}

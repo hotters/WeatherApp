@@ -1,0 +1,31 @@
+@import '../../styles-config.scss';
+
+.container {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-column-gap: 15px;
+	grid-row-gap: 15px;
+	@include sm {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	@include md {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+.card {
+	padding: 10px;
+	border-radius: 5px;
+	user-select: none;
+	background: #1565C0;
+	color: #000;
+}
+
+.high {
+	font-size: 40px;
+}
+
+.low {
+	font-size: 32px;
+}
+

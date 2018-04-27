@@ -1,13 +1,15 @@
-<div class="progress_bar">
+<div class="progress">
 	<mat-progress-bar mode="indeterminate" *ngIf="loading$ | async"></mat-progress-bar>
 </div>
 
-<mat-form-field class="city_input">
-	<input matInput placeholder="Enter city" value="khabarovsk" #city (keyup.enter)="getWeather(city.value)">
-	<mat-hint>To search press Enter</mat-hint>
-</mat-form-field>
-
-<app-chart></app-chart>
-<app-card></app-card>
-
-<!--<pre>Loading: {{loading$ | async | json}}</pre>-->
+<div class="container">
+	<mat-form-field class="city_input">
+		<input matInput placeholder="Enter city" value="khabarovsk" #city (keyup.enter)="getWeather(city.value)">
+		<mat-hint>To search press Enter</mat-hint>
+		<mat-error *ngIf="error$ | async as error">{{error}}</mat-error>
+	</mat-form-field>
+	<h2 class="location" *ngIf="location$ | async as location">{{location.country}}, {{location.region}}, {{location.city}}</h2>
+	<app-chart class="chart"></app-chart>
+	<app-current class="current"></app-current>
+	<app-cards class="cards"></app-cards>
+</div>

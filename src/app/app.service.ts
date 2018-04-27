@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Wind } from './models/wind.model';
 import { Atmosphere } from './models/atmosphere.model';
 import { CurrentForecast, Forecast } from './models/forecast.model';
+import { Location } from './models/location.model';
 
 
 @Injectable()
@@ -31,6 +32,11 @@ export class AppService {
 				}
 			}),
 			map(data => {
+				const location: Location = {
+					country: data.location.country,
+					region: data.location.region,
+					city: data.location.city,
+				};
 				const wind: Wind = {
 					chill: data.wind.chill,
 					speed: data.wind.speed
@@ -57,6 +63,7 @@ export class AppService {
 					text: data.item.condition.text,
 				};
 				return {
+					location: location,
 					wind: wind,
 					atmosphere: atmosphere,
 					forecast: forecast,

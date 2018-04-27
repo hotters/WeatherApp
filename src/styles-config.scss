@@ -1,0 +1,17 @@
+/* GRID PARAMS */
+$columns: 12;
+$col-gap: 15px;
+$row-gap: 25px;
+
+/* MEDIA QUERIES */
+@mixin sm {
+	@media (max-width: '425px') {
+		@content;
+	}
+}
+@mixin md {
+	@media (min-width: '425px') and (max-width: '768px') {
+		@content;
+	}
+}
+
