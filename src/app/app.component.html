@@ -4,12 +4,20 @@
 
 <div class="container">
 	<mat-form-field class="city_input">
-		<input matInput placeholder="Enter city" value="khabarovsk" #city (keyup.enter)="getWeather(city.value)">
-		<mat-hint>To search press Enter</mat-hint>
-		<mat-error *ngIf="error$ | async as error">{{error}}</mat-error>
+		<input matInput placeholder="Enter city" [errorStateMatcher]="matcher" [formControl]="cityInput" (keyup.enter)="getWeather(cityInput.value)">
+		<mat-hint>For search press Enter</mat-hint>
+		<mat-error *ngIf="cityInput.hasError('required')">Input city</mat-error>
+		<mat-error *ngIf="cityInput.hasError('data')">{{cityInput.errors?.data}}</mat-error>
 	</mat-form-field>
-	<h2 class="location" *ngIf="location$ | async as location">{{location.country}}, {{location.region}}, {{location.city}}</h2>
-	<app-chart class="chart"></app-chart>
-	<app-current class="current"></app-current>
-	<app-cards class="cards"></app-cards>
+
+<ng-container *ngIf="cityInput.valid">
+		<h2 class="location" *ngIf="(location$ | async) as location">{{location.country}}, {{location.region}}, {{location.city}}</h2>
+		<app-chart class="chart"></app-chart>
+		<app-current class="current"></app-current>
+		<app-cards class="cards"></app-cards>
+	</ng-container>
 </div>
+<!--
+<pre>error$: {{error$ | async | json}}</pre>
+<pre>errors: {{cityInput.errors | json}}</pre>
+<pre>status: {{cityInput.status | json}}</pre> -->

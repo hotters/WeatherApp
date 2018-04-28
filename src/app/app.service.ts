@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import 'rxjs/add/observable/throw';
 
 import { Weather } from './models/weather.model';
 import { Observable } from 'rxjs/Observable';
@@ -8,6 +9,7 @@ import { Wind } from './models/wind.model';
 import { Atmosphere } from './models/atmosphere.model';
 import { CurrentForecast, Forecast } from './models/forecast.model';
 import { Location } from './models/location.model';
+
 
 
 @Injectable()
@@ -28,7 +30,7 @@ export class AppService {
 				if (data && data.query && data.query.results && data.query.results.channel) {
 					return data.query.results.channel;
 				} else {
-					throw('Data error');
+					throw('City Not Found');
 				}
 			}),
 			map(data => {
@@ -69,7 +71,8 @@ export class AppService {
 					forecast: forecast,
 					current: current
 				};
-			})
+			}),
+			catchError(error => Observable.throw(error))
 		);
 	}
 

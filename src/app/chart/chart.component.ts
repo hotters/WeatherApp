@@ -1,11 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Chart } from 'chart.js';
-// import 'chartjs-plugin-datalabels';
 import { Observable } from 'rxjs/Observable';
 import { Forecast } from '../models/forecast.model';
 import { Weather } from '../models/weather.model';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 
 
 @Component({
@@ -18,12 +17,11 @@ import { filter, map } from 'rxjs/operators';
 export class ChartComponent implements OnInit {
 
 	@ViewChild('canvas') canvas: ElementRef;
-	chart: any = [];
-
 	@Select((state: { data: { weather: Weather } }) => state.data.weather && state.data.weather.forecast) forecast$: Observable<Forecast[]>;
 
-	constructor() {
-	}
+	chart: Chart;
+
+	constructor() { }
 
 	ngOnInit() {
 		this.forecast$.pipe(
@@ -35,8 +33,6 @@ export class ChartComponent implements OnInit {
 				const max = data.map(item => +item.high);
 				const weatherDates = data.map(item => item.day);
 				const ctx = this.canvas.nativeElement.getContext('2d');
-				console.log('[CHART]', min, max, weatherDates, ctx);
-
 				this.chart = new Chart(ctx, {
 					type: 'bar',
 					data: {
@@ -75,7 +71,6 @@ export class ChartComponent implements OnInit {
 					}
 				});
 			});
-
 	}
 
 }

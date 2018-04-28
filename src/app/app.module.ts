@@ -14,6 +14,7 @@ import { CardsComponent } from './cards/cards.component';
 import { ChartComponent } from './chart/chart.component';
 import { CurrentComponent } from './current/current.component';
 import { AppState } from './store/app.store';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { AppState } from './store/app.store';
 	],
 	imports: [
 		BrowserModule,
+		ReactiveFormsModule,
 		HttpClientModule,
 		BrowserAnimationsModule,
 		ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
@@ -40,5 +42,4 @@ import { AppState } from './store/app.store';
 		AppComponent
 	]
 })
-export class AppModule {
-}
+export class AppModule { }
