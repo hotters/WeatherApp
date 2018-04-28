@@ -8,8 +8,8 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-	"e2e": "ng e2e",
-	"http": "http-server dist -p 4200 -o"
+    "e2e": "ng e2e",
+    "http": "http-server dist -p 4200 -o"
   },
   "private": true,
   "dependencies": {

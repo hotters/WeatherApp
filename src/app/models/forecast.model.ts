@@ -1,8 +1,8 @@
 export interface Forecast {
 	date: string;
 	day: string;
-	high: string;
-	low: string;
+	high: number;
+	low: number;
 	text: string;
 }
 

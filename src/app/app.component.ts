@@ -1,22 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from './app.service';
-import { Observable } from 'rxjs/Observable';
-import { Select, Store } from '@ngxs/store';
-import { Weather } from './models/weather.model';
-import { GetWeather, AppState } from './store/app.store';
-import { Wind } from './models/wind.model';
-import { Location } from './models/location.model';
-import { filter, distinctUntilChanged, map, tap, take, switchMap, first, last, single } from 'rxjs/operators';
 import { FormControl, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs/Observable';
 
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-	isErrorState(control: FormControl | null, form: null): boolean {
-		return !!(control && control.invalid && (control.dirty || control.touched));
-	}
-}
-
+import { ErrorMatcher } from './lib/error-matcher';
+import { Location } from './models/location.model';
+import { GetWeather } from './store/app.store';
 
 @Component({
 	selector: 'app-root',
@@ -25,7 +14,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class AppComponent implements OnInit {
 
-	matcher = new MyErrorStateMatcher();
+	matcher = new ErrorMatcher();
 
 	@Select(state => state.data.weather && state.data.weather.location) location$: Observable<Location>;
 	@Select(state => state.data.loading) loading$: Observable<boolean>;

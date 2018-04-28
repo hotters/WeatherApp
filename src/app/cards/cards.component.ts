@@ -12,7 +12,7 @@ export class CardsComponent {
 
 	@Select((state: { data: { weather: Weather } }) => state.data.weather) weather$: Observable<Weather>;
 
-	setColorOfTemperature(temp) {
-		return 'hsl(' + 30 + 240 * (30 - +temp) / 60 + ', 70%, 50%)';
+	setColorOfTemperature(temp: number) {
+		return `hsl(${30 + 240 * (30 - temp) / 60}, 70%, 50%)`;
 	}
 }
