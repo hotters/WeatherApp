@@ -5,7 +5,6 @@ import { AppService } from './app.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('Service: App', () => {
-	// let service: AppService;
 	let http: HttpTestingController;
 
 	beforeEach(() => {
@@ -14,7 +13,6 @@ describe('Service: App', () => {
 			providers: [AppService]
 		});
 		http = TestBed.get(HttpTestingController);
-		// service = TestBed.get(AppService);
 	});
 
 	it('Должен обращаться к YAHOO API WEATHER', inject([AppService], (service: AppService) => {

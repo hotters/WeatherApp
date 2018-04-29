@@ -11,7 +11,6 @@ import { CurrentForecast, Forecast } from './models/forecast.model';
 import { Location } from './models/location.model';
 
 
-
 @Injectable()
 export class AppService {
 
@@ -30,50 +29,67 @@ export class AppService {
 				if (data && data.query && data.query.results && data.query.results.channel) {
 					return data.query.results.channel;
 				} else {
-					throw('City Not Found');
+					throw ('City Not Found');
 				}
 			}),
 			map(data => {
-				const location: Location = {
-					country: data.location.country,
-					region: data.location.region,
-					city: data.location.city,
-				};
-				const wind: Wind = {
-					chill: data.wind.chill,
-					speed: data.wind.speed
-				};
-				const atmosphere: Atmosphere = {
-					humidity: data.atmosphere.humidity,
-					pressure: data.atmosphere.pressure,
-					visibility: data.atmosphere.visibility
-				};
-				const forecast: Forecast[] = [];
-				data.item.forecast.forEach(item => {
-					const forecastItem: Forecast = {
-						date: item.date,
-						day: item.day,
-						text: item.text,
-						high: item.high,
-						low: item.low,
-					};
-					forecast.push(forecastItem);
-				});
-				const current: CurrentForecast = {
-					date: data.item.condition.date,
-					temp: data.item.condition.temp,
-					text: data.item.condition.text,
-				};
-				return {
-					location: location,
-					wind: wind,
-					atmosphere: atmosphere,
-					forecast: forecast,
-					current: current
-				};
+				return this.createWeather(data);
 			}),
 			catchError(error => Observable.throw(error))
 		);
+	}
+
+	createWeather(data): Weather {
+		return {
+			location: this.createLocations(data.location),
+			wind: this.createWind(data.wind),
+			atmosphere: this.createAtmosphere(data.atmosphere),
+			forecast: this.createForecast(data.item.forecast),
+			current: this.createCurrentForecast(data.item.condition)
+		};
+	}
+
+	createLocations(location): Location {
+		return {
+			country: location.country,
+			region: location.region,
+			city: location.city,
+		};
+	}
+
+	createWind(wind): Wind {
+		return {
+			chill: wind.chill,
+			speed: wind.speed
+		};
+	}
+
+	createAtmosphere(atmosphere): Atmosphere {
+		return {
+			humidity: atmosphere.humidity,
+			pressure: atmosphere.pressure,
+			visibility: atmosphere.visibility
+		};
+	}
+
+	createForecast(forecast): Forecast[] {
+		return forecast.map((item): Forecast => {
+			return {
+				date: item.date,
+				day: item.day,
+				text: item.text,
+				high: item.high,
+				low: item.low,
+			};
+		});
+	}
+
+	createCurrentForecast(current): CurrentForecast {
+		return {
+			date: current.date,
+			temp: current.temp,
+			text: current.text,
+		};
 	}
 
 }
