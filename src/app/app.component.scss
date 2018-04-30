@@ -35,11 +35,14 @@ mat-progress-bar {
 .chart {
 	grid-column: 1 / 7;
 	align-self: center;
+	height: 33vw;
 	@include sm {
 		grid-column: 1 / 13;
+		height: 33vh;
 	}
 	@include md {
 		grid-column: 2 / 12;
+		// height: 350px;
 	}
 }
 

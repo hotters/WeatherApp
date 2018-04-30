@@ -78,8 +78,8 @@ export class AppService {
 				date: item.date,
 				day: item.day,
 				text: item.text,
-				high: item.high,
-				low: item.low,
+				high: +item.high,
+				low: +item.low,
 			};
 		});
 	}
