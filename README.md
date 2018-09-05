@@ -2,7 +2,7 @@
 
 ## Browser support
 
-## **Chrome 63+ | Firefox 58+ | Safari 11+ | Edge 16+**
+### **Chrome 63+ | Firefox 58+ | Safari 11+ | Edge 16+**
 
 ## Install
 
